@@ -24,4 +24,4 @@ target_link_libraries(Truckload truck_nested)
 
 add_executable(TruckloadUnitTests tests/testgtest.cpp)
 target_link_libraries(TruckloadUnitTests gtest gtest_main)
-add_test(TruckloadUnitTests runUnitTests)
+add_test(TruckloadUnitTests TruckloadUnitTests)
