@@ -1,3 +1,6 @@
+## 0.0.6 - 21/09/2019
+Attempt to integrate CI (#2)
+
 ## 0.0.5 - 21/09/2019
 Attempt to integrate CI (#1)
 
