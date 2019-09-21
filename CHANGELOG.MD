@@ -1,3 +1,6 @@
+## 0.0.10 - 21/09/2019
+first box test integrated (#6)
+
 ## 0.0.9 - 21/09/2019
 bash bug fix
 Attempt to integrate CI (#5)

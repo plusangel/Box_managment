@@ -1,8 +1,12 @@
 #include <iostream>
 
 #include "gtest/gtest.h"
+#include "Box.h"
 
-TEST(sample_test_case, sample_test)
+TEST(box_test, box_addition)
 {
-EXPECT_EQ(1, 1);
+    Box sumBox {1, 1, 2};
+    Box aBox {1, 1, 1};
+
+    EXPECT_EQ(sumBox, aBox+aBox);
 }
