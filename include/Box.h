@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <algorithm>
 
 class Box {
 private:
@@ -17,7 +18,7 @@ private:
 public:
     Box(double lv, double wv, double hv) : length {lv}, width {wv}, height {hv} { }
 
-    explicit Box() = default;
+    Box() = default;
 
     double volume() const
     { return length * width * height; }
@@ -34,6 +35,9 @@ public:
 
     bool operator==(const Box& aBox) const
     { return volume() == aBox.volume(); }
+
+    Box& operator+=(const Box& aBox);
+    Box operator+(const Box& aBox) const;
 
     bool operator<(double value) const;
 
@@ -57,6 +61,33 @@ public:
 inline bool operator<(const Box& box1, const Box& box2)
 { return box1.volume() < box2.volume(); }
 */
+
+/*
+// standalone implementation
+inline Box Box::operator+(const Box &aBox) const
+{
+    return Box {std::max(length, aBox.length),
+                std::max(width, aBox.width),
+                height + aBox.height };
+}
+ */
+
+inline Box& Box::operator+=(const Box &aBox)
+{
+    length = std::max(length, aBox.length);
+    width  = std::max(width, aBox.width);
+    height += aBox.height;
+    return *this;
+}
+
+inline Box Box::operator+(const Box &aBox) const
+{
+    Box copy {*this};
+    copy += aBox;
+    return copy;
+}
+
+
 inline bool Box::operator<(double value) const
 { return volume() < value; }
 

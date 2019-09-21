@@ -5,7 +5,7 @@
 #include <string_view>
 #include "Truckload_nested.h"
 
-long random(const size_t i);
+long random(size_t count);
 using namespace std::rel_ops;
 
 inline SharedBox randomBox()
@@ -21,10 +21,7 @@ long random(const size_t count)
 
 void show(const Box& box1, std::string_view relationship, const Box& box2)
 {
-    std::cout << "Box " << box1.getLength() << 'x' << box1.getWidth() << 'x' << box1.getHeight()
-                << relationship
-                << "Box " << box2.getLength() << 'x' << box2.getWidth() << 'x' << box2.getHeight()
-                << std::endl;
+    std::cout << box1 << relationship << box2 << std::endl;
 }
 
 SharedBox findLargestBox(const Truckload_nested& truckload)
@@ -78,6 +75,12 @@ int main() {
     std::cout << std::endl;
 
     std::cout << boxes[0] << std::endl;
+
+    Box sum{0, 0,0};
+    for (const auto& box : boxes)
+        sum += box;
+
+    std::cout << "The sum of " << boxCount << " random Boxes is " << sum;
     /*
     load1.removeBox(largestBox);
     std::cout << "\nAfter deleting the largest box, the list contains:\n";
