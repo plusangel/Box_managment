@@ -1,3 +1,6 @@
+## 0.0.5 - 21/09/2019
+Attempt to integrate CI (#1)
+
 ## 0.0.4 - 21/09/2019
 bug fix
 
