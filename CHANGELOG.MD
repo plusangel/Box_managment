@@ -1,3 +1,7 @@
+## 0.0.7 - 21/09/2019
+Determine linker language
+Attempt to integrate CI (#2)
+
 ## 0.0.6 - 21/09/2019
 Attempt to integrate CI (#2)
 
