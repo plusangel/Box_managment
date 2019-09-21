@@ -80,7 +80,7 @@ int main() {
     for (const auto& box : boxes)
         sum += box;
 
-    std::cout << "The sum of " << boxCount << " random Boxes is " << sum;
+    std::cout << "The sum of " << boxes.size() << " random Boxes is " << sum;
     /*
     load1.removeBox(largestBox);
     std::cout << "\nAfter deleting the largest box, the list contains:\n";

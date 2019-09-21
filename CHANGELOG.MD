@@ -1,3 +1,6 @@
+## 0.0.4 - 21/09/2019
+bug fix
+
 ## 0.0.3 - 21/09/2019
 GoogleTests integrated to the project
 More overloaded operators added to the Box
