@@ -1,4 +1,8 @@
-## 0.0.7 - 21/09/2019
+## 0.0.9 - 21/09/2019
+bash bug fix
+Attempt to integrate CI (#5)
+
+## 0.0.8 - 21/09/2019
 Cmake bug fix
 Attempt to integrate CI (#4)
 
