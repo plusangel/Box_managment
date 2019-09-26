@@ -10,3 +10,19 @@ TEST(box_test, box_addition)
 
     EXPECT_EQ(sumBox, aBox+aBox);
 }
+
+TEST(box_test, box_prefix_incement)
+{
+    Box aBox {1, 1, 1,};
+    Box result {2, 2, 2};
+
+    EXPECT_EQ(++aBox, result);
+}
+
+TEST(box_test, box_postfix_incement)
+{
+    Box aBox {1, 1, 1,};
+    Box result {1, 1, 1};
+
+    EXPECT_EQ(aBox++, result);
+}

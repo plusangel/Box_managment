@@ -11,13 +11,26 @@ class Truckload {
 private:
     Package* pHead {};
     Package* pTail {};
-    Package* pCurrent {};
 
 public:
+    class Iterator
+    {
+    private:
+        Package* pHead;
+        Package* pCurrent;
+
+        friend class Truckload;
+        explicit Iterator(Package* head) : pHead {head}, pCurrent {nullptr} {}
+    public:
+        SharedBox getFirstBox();
+        SharedBox getNextBox();
+    };
+
+    Iterator getIterator() const { return Iterator {pHead};}
+
     Truckload() = default;
 
-    Truckload(SharedBox pBox)
-    { pHead = pTail = new Package {pBox};}
+    Truckload(SharedBox pBox) { pHead = pTail = new Package {pBox};}
 
     Truckload(const std::vector<SharedBox>& boxes);
 
@@ -25,11 +38,24 @@ public:
 
     ~Truckload() { delete pHead; }
 
-    SharedBox getFirstBox();
-    SharedBox getNextBox();
+    SharedBox operator[](size_t index) const;
     void addBox(SharedBox pBox);
     bool removeBox(SharedBox box);
-    void listBoxes() const;
 };
+
+
+inline std::ostream& operator<<(std::ostream& stream, const Truckload& load)
+{
+    size_t count {};
+    auto iterator = load.getIterator();
+
+    for (auto box = iterator.getFirstBox(); box; box = iterator.getNextBox())
+    {
+        std::cout << *box;
+        if (!(++count % 5)) std::cout << std::endl;
+    }
+    if (count % 5) std::cout << std::endl;
+    return stream;
+}
 
 #endif //TRUCKLOAD_TRUCKLOAD_H

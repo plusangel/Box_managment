@@ -20,37 +20,13 @@ Truckload::Truckload(const Truckload& src)
     }
 }
 
-void Truckload::listBoxes() const
-{
-    const size_t boxesPerLine = 5;
-    size_t count {};
-
-    /*
-    Package* currentPackage {pHead};
-
-    while (currentPackage)
-    {
-        currentPackage->getBox()->listBox();
-        if (!(++count % boxesPerLine)) std::cout << std::endl;
-        currentPackage = currentPackage->getNext();
-    }*/
-
-    for (Package* a_package{pHead}; a_package; a_package = a_package->getNext())
-    {
-        a_package->getBox()->listBox();
-        if (!(++count % boxesPerLine))
-            std::cout << std::endl;
-    }
-    if (count % boxesPerLine) std::cout << std::endl;
-}
-
-SharedBox Truckload::getFirstBox()
+SharedBox Truckload::Iterator::getFirstBox()
 {
     pCurrent = pHead;
     return pCurrent? pCurrent->getBox() : nullptr;
 }
 
-SharedBox Truckload::getNextBox()
+SharedBox Truckload::Iterator::getNextBox()
 {
     if (!pCurrent)
         return getFirstBox();
@@ -97,4 +73,16 @@ bool Truckload::removeBox(SharedBox boxToRemove)
     }
     return false;
 }
+
+SharedBox Truckload::operator[](size_t index) const
+{
+    size_t count {};
+    for (Package* package {pHead}; package; package = package->getNext())
+    {
+        if (index == count++)
+            return package->getBox();
+    }
+    return nullptr;
+}
+
 

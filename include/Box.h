@@ -20,8 +20,7 @@ public:
 
     Box() = default;
 
-    double volume() const
-    { return length * width * height; }
+    double volume() const { return length * width * height; }
 
     int compare(const Box& box) const
     {
@@ -30,25 +29,26 @@ public:
         return 1;
     }
 
-    bool operator<(const Box& aBox) const
-    { return volume() < aBox.volume(); }
+    bool operator<(const Box& aBox) const { return volume() < aBox.volume(); }
 
-    bool operator==(const Box& aBox) const
-    { return volume() == aBox.volume(); }
+    bool operator==(const Box& aBox) const { return volume() == aBox.volume(); }
 
     Box& operator+=(const Box& aBox);
     Box operator+(const Box& aBox) const;
 
-    bool operator<(double value) const;
+    bool operator<(double value) const { return volume() < value; }
 
-    double getLength() const
-    { return length; }
+    Box operator~() const { return Box {width, length, height};}
 
-    double getWidth() const
-    { return width; }
+    Box& operator++();  // Overloaded prefix increment operator
+    Box& operator--();
+    const Box operator++(int);  // Overloaded postfix increment operator
 
-    double getHeight() const
-    { return height; }
+    double getLength() const { return length; }
+
+    double getWidth() const { return width; }
+
+    double getHeight() const { return height; }
 
     void listBox() const
     {
@@ -72,6 +72,29 @@ inline Box Box::operator+(const Box &aBox) const
 }
  */
 
+inline Box& Box::operator++() // prefix
+{
+    ++length;
+    ++width;
+    ++height;
+    return *this;
+}
+
+inline Box& Box::operator--() // prefix
+{
+    --length;
+    --width;
+    --height;
+    return *this;
+}
+
+inline const Box Box::operator++(int) //postfix
+{
+    auto copy {*this};
+    ++(*this);
+    return copy;
+}
+
 inline Box& Box::operator+=(const Box &aBox)
 {
     length = std::max(length, aBox.length);
@@ -86,10 +109,6 @@ inline Box Box::operator+(const Box &aBox) const
     copy += aBox;
     return copy;
 }
-
-
-inline bool Box::operator<(double value) const
-{ return volume() < value; }
 
 inline bool operator<(double value, const Box& aBox)
 { return value < aBox.volume(); }

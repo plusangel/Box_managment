@@ -20,7 +20,7 @@ add_library(truck_nested src/Truckload_nested.cpp)
 set_target_properties(truck_nested PROPERTIES LINKER_LANGUAGE CXX)
 
 add_executable(Truckload main.cpp)
-target_link_libraries(Truckload truck_nested)
+target_link_libraries(Truckload truck)
 
 add_executable(TruckloadUnitTests tests/testgtest.cpp)
 target_link_libraries(TruckloadUnitTests gtest gtest_main)

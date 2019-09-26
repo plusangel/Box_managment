@@ -1,3 +1,6 @@
+## 0.0.12 - 26/09/2019
+More overloaded operators added + unit tests added
+
 ## 0.0.11 - 21/09/2019
 Attempt to run the test
 

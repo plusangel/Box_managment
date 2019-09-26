@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <utility>
 #include <string_view>
-#include "Truckload_nested.h"
+#include "Truckload.h"
 
 long random(size_t count);
 using namespace std::rel_ops;
@@ -24,7 +24,7 @@ void show(const Box& box1, std::string_view relationship, const Box& box2)
     std::cout << box1 << relationship << box2 << std::endl;
 }
 
-SharedBox findLargestBox(const Truckload_nested& truckload)
+SharedBox findLargestBox(const Truckload& truckload)
 {
     auto iterator = truckload.getIterator();
     SharedBox largestBox { iterator.getFirstBox() };
@@ -46,24 +46,19 @@ int main() {
 
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
-    Truckload_nested load1;
+    Truckload load1;
 
     const size_t boxCount {12};
     for (size_t i {}; i < boxCount; ++i)
         load1.addBox(randomBox());
 
     std::cout << "The first list:\n";
-    load1.listBoxes();
+    std::cout << load1;
 
     // copy
-    Truckload_nested copy {load1};
+    Truckload copy {load1};
     std::cout << "The copied truckload:\n";
     copy.listBoxes();
-
-    // find the largest box in the list
-    std::cout << "\nThe largest box in the first list is ";
-    findLargestBox(load1)->listBox();
-    std::cout << std::endl;
 
     const std::vector<Box> boxes {Box {2.0, 2.0, 3.0}, Box {1.0, 3.0, 2.0},
                                   Box {1.0, 2.0, 1.0}, Box {2.0, 3.0, 3.0}};
@@ -80,30 +75,15 @@ int main() {
     for (const auto& box : boxes)
         sum += box;
 
-    std::cout << "The sum of " << boxes.size() << " random Boxes is " << sum;
-    /*
-    load1.removeBox(largestBox);
-    std::cout << "\nAfter deleting the largest box, the list contains:\n";
-    load1.listBoxes();
+    std::cout << "The sum of " << boxes.size() << " random Boxes is " << sum << std::endl;
 
-    const size_t nBoxes {20};
-    std::vector<SharedBox> boxes;
+    Box oneBox {3.0, 1.0, 3.0};
+    std::cout << std::endl << "Our test Box is " << oneBox << std::endl;
+    std::cout << "Postfix increment evaluates to the original object: "
+              << oneBox++ << std::endl;
+    std::cout << "After postfix increment: " << oneBox << std::endl;
+    std::cout << "Prefix decrement evaluates to the decremented object: " << --oneBox << std::endl;
+    std::cout << "After prefix decrement: " << oneBox << std::endl;
 
-    for (size_t i {}; i < nBoxes ; ++i)
-        boxes.push_back(randomBox());
-
-    Truckload_nested load2 {boxes};
-    std::cout << "The second list:\n";
-    load2.listBoxes();
-
-    auto smallestBox = load2.getFirstBox();
-    for (auto nextBox = load2.getNextBox(); nextBox; nextBox = load2.getNextBox())
-        if (nextBox->compare(*smallestBox) < 0)
-            smallestBox = nextBox;
-
-    std::cout << "\nThe smallest box in the second list is ";
-    smallestBox->listBox();
-    std::cout << std::endl;
-    */
     return 0;
 }
