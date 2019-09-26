@@ -1,3 +1,6 @@
+## 0.0.13 - 26/09/2019
+Bug fix
+
 ## 0.0.12 - 26/09/2019
 More overloaded operators added + unit tests added
 

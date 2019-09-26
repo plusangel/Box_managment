@@ -58,7 +58,7 @@ int main() {
     // copy
     Truckload copy {load1};
     std::cout << "The copied truckload:\n";
-    copy.listBoxes();
+    std::cout << copy;
 
     const std::vector<Box> boxes {Box {2.0, 2.0, 3.0}, Box {1.0, 3.0, 2.0},
                                   Box {1.0, 2.0, 1.0}, Box {2.0, 3.0, 3.0}};
