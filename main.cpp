@@ -4,6 +4,7 @@
 #include <utility>
 #include <string_view>
 #include "Truckload.h"
+#include "Volume.h"
 
 long random(size_t count);
 using namespace std::rel_ops;
@@ -55,25 +56,21 @@ int main() {
     std::cout << "The first list:\n";
     std::cout << load1;
 
-    // copy
-    Truckload copy {load1};
-    std::cout << "The copied truckload:\n";
-    std::cout << copy;
-
     const std::vector<Box> boxes {Box {2.0, 2.0, 3.0}, Box {1.0, 3.0, 2.0},
                                   Box {1.0, 2.0, 1.0}, Box {2.0, 3.0, 3.0}};
     const Box theBox {3.0, 1.0, 3.0};
 
     // find the smallest box
+    Volume volume;
     double maxVolume {};
     size_t  maxIndex {};
     size_t i {};
     while (load1[i])
     {
-        if (load1[i]->volume() > maxVolume)
+        if (volume(*load1[i]) > maxVolume)
         {
             maxIndex = i;
-            maxVolume = load1[i]->volume();
+            maxVolume = volume(*load1[i]);
         }
         ++i;
     }

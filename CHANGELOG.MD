@@ -1,3 +1,6 @@
+## 0.0.15 - 28/09/2019
+Functor added
+
 ## 0.0.14 - 28/09/2019
 Remove package library and embedded in the Truckload
 Overloaded subscript operator

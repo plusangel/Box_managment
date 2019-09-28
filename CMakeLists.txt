@@ -5,13 +5,17 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories(include)
 
+# gtests
 add_subdirectory(lib)
 enable_testing()
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-
 add_library(box include/Box.h)
 set_target_properties(box PROPERTIES LINKER_LANGUAGE CXX)
+
+add_library(volume include/Volume.h)
+set_target_properties(volume PROPERTIES LINKER_LANGUAGE CXX)
+
 add_library(truck src/Truckload.cpp)
 set_target_properties(truck PROPERTIES LINKER_LANGUAGE CXX)
 
