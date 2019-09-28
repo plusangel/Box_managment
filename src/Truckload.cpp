@@ -4,6 +4,8 @@
 
 #include "Truckload.h"
 
+SharedBox Truckload::nullBox {};
+
 Truckload::Truckload(const std::vector<SharedBox>& boxes)
 {
     for (const auto& item : boxes)
@@ -14,16 +16,16 @@ Truckload::Truckload(const std::vector<SharedBox>& boxes)
 
 Truckload::Truckload(const Truckload& src)
 {
-    for (Package* a_package{src.pHead}; a_package; a_package = a_package->getNext())
+    for (Package* a_package{src.pHead}; a_package; a_package = a_package->pNext)
     {
-        addBox(a_package->getBox());
+        addBox(a_package->pBox);
     }
 }
 
 SharedBox Truckload::Iterator::getFirstBox()
 {
     pCurrent = pHead;
-    return pCurrent? pCurrent->getBox() : nullptr;
+    return pCurrent? pCurrent->pBox : nullptr;
 }
 
 SharedBox Truckload::Iterator::getNextBox()
@@ -31,8 +33,8 @@ SharedBox Truckload::Iterator::getNextBox()
     if (!pCurrent)
         return getFirstBox();
 
-    pCurrent = pCurrent->getNext();
-    return pCurrent? pCurrent->getBox() : nullptr;
+    pCurrent = pCurrent->pNext;
+    return pCurrent? pCurrent->pBox : nullptr;
 }
 
 void Truckload::addBox(SharedBox pBox)
@@ -40,7 +42,7 @@ void Truckload::addBox(SharedBox pBox)
     auto pPackage = new Package{pBox};
 
     if (pTail)
-        pTail->setNext(pPackage);
+        pTail->pNext = pPackage;
     else
         pHead = pPackage;
 
@@ -55,34 +57,34 @@ bool Truckload::removeBox(SharedBox boxToRemove)
 
     while (current)
     {
-        if (current->getBox() == boxToRemove)
+        if (current->pBox == boxToRemove)
         {
             if (previous)
             {
-                previous->setNext(current->getNext());
+                previous->pNext = current->pNext;
             } else {
-                pHead = current->getNext();
+                pHead = current->pNext;
             }
-            current->setNext(nullptr);
+            current->pNext = nullptr;
             delete current;
 
             return true;
         }
         previous = current;
-        current = current->getNext();
+        current = current->pNext;
     }
     return false;
 }
 
-SharedBox Truckload::operator[](size_t index) const
+SharedBox& Truckload::operator[](size_t index)
 {
     size_t count {};
-    for (Package* package {pHead}; package; package = package->getNext())
+    for (Package* package {pHead}; package; package = package->pNext)
     {
         if (index == count++)
-            return package->getBox();
+            return package->pBox;
     }
-    return nullptr;
+    return nullBox;
 }
 
 

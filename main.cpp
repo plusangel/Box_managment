@@ -64,6 +64,23 @@ int main() {
                                   Box {1.0, 2.0, 1.0}, Box {2.0, 3.0, 3.0}};
     const Box theBox {3.0, 1.0, 3.0};
 
+    // find the smallest box
+    double maxVolume {};
+    size_t  maxIndex {};
+    size_t i {};
+    while (load1[i])
+    {
+        if (load1[i]->volume() > maxVolume)
+        {
+            maxIndex = i;
+            maxVolume = load1[i]->volume();
+        }
+        ++i;
+    }
+
+    std::cout << "\nThe largest box is: ";
+    std::cout << *load1[maxIndex] << std::endl;
+
     for (const auto& box : boxes)
         if (theBox > box) show(theBox, " is greater than ", box);
 

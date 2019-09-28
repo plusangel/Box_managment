@@ -1,3 +1,7 @@
+## 0.0.14 - 28/09/2019
+Remove package library and embedded in the Truckload
+Overloaded subscript operator
+
 ## 0.0.13 - 26/09/2019
 Bug fix
 

@@ -4,13 +4,27 @@
 
 #ifndef TRUCKLOAD_TRUCKLOAD_H
 #define TRUCKLOAD_TRUCKLOAD_H
+#include <memory>
+#include <vector>
+#include "Box.h"
 
-#include "Package.h"
+using SharedBox = std::shared_ptr<Box>;
 
 class Truckload {
 private:
+    class Package {
+    public:
+        SharedBox pBox;             // Pointer to the Box object contained in this Package
+        Package* pNext;             // Pointer to the next Package in the list
+
+        explicit Package(SharedBox pb) : pBox{pb}, pNext{nullptr} {}     // Constructor
+        ~Package() { delete pNext; }                            // Destructor
+    };
+
     Package* pHead {};
     Package* pTail {};
+
+    static SharedBox nullBox;
 
 public:
     class Iterator
@@ -38,7 +52,7 @@ public:
 
     ~Truckload() { delete pHead; }
 
-    SharedBox operator[](size_t index) const;
+    SharedBox& operator[](size_t index);
     void addBox(SharedBox pBox);
     bool removeBox(SharedBox box);
 };
