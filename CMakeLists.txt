@@ -16,6 +16,9 @@ set_target_properties(box PROPERTIES LINKER_LANGUAGE CXX)
 add_library(volume include/Volume.h)
 set_target_properties(volume PROPERTIES LINKER_LANGUAGE CXX)
 
+add_library(carton include/Carton.h)
+set_target_properties(carton PROPERTIES LINKER_LANGUAGE CXX)
+
 add_library(truck src/Truckload.cpp)
 set_target_properties(truck PROPERTIES LINKER_LANGUAGE CXX)
 

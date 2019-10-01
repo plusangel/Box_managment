@@ -5,6 +5,7 @@
 #include <string_view>
 #include "Truckload.h"
 #include "Volume.h"
+#include "Carton.h"
 
 long random(size_t count);
 using namespace std::rel_ops;
@@ -46,7 +47,7 @@ SharedBox findLargestBox(const Truckload& truckload)
 int main() {
 
     std::srand(static_cast<unsigned>(std::time(nullptr)));
-
+    /*
     Truckload load1;
 
     const size_t boxCount {12};
@@ -98,6 +99,12 @@ int main() {
     std::cout << "After postfix increment: " << oneBox << std::endl;
     std::cout << "Prefix decrement evaluates to the decremented object: " << --oneBox << std::endl;
     std::cout << "After prefix decrement: " << oneBox << std::endl;
+    */
+
+    Carton carton1;
+    Carton carton2 {"Thin cardboard"};
+    Carton carton3 {4.0, 5.0, 6.0, "Plastic"};
+    Carton carton4 {2.0, "paper"};
 
     return 0;
 }

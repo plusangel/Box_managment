@@ -1,3 +1,7 @@
+## 0.0.16 - 01/10/2019
+Carton subclass added
+Box class modified
+
 ## 0.0.15 - 28/09/2019
 Functor added
 

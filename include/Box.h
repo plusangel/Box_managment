@@ -16,9 +16,22 @@ private:
     double height {1.0};
 
 public:
-    Box(double lv, double wv, double hv) : length {lv}, width {wv}, height {hv} { }
+    Box(double lv, double wv, double hv) : length {lv}, width {wv}, height {hv}
+    {
+        std::cout << "Box(double, double, double) called.\n";
+    }
 
-    Box() = default;
+    explicit Box(double side) : Box{side, side, side}
+    {
+        std::cout << "Box(double) called.\n";
+    }
+
+    Box() { std::cout << "Box() called.\n"; }
+
+    Box(const Box& box): length{box.length}, width{box.width}, height{box.height}
+    {
+        std::cout << "Box copy constructor" << std::endl;
+    }
 
     double volume() const { return length * width * height; }
 
