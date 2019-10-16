@@ -10,7 +10,7 @@
 #include <algorithm>
 
 class Box {
-private:
+protected:
     double length {1.0};
     double width {1.0};
     double height {1.0};
@@ -18,22 +18,26 @@ private:
 public:
     Box(double lv, double wv, double hv) : length {lv}, width {wv}, height {hv}
     {
-        std::cout << "Box(double, double, double) called.\n";
+        //std::cout << "Box(double, double, double) called.\n";
     }
 
     explicit Box(double side) : Box{side, side, side}
     {
-        std::cout << "Box(double) called.\n";
+        //std::cout << "Box(double) called.\n";
     }
 
-    Box() { std::cout << "Box() called.\n"; }
+    Box()
+    {
+        //std::cout << "Box() called.\n";
+    }
 
     Box(const Box& box): length{box.length}, width{box.width}, height{box.height}
     {
-        std::cout << "Box copy constructor" << std::endl;
+        //std::cout << "Box copy constructor" << std::endl;
     }
 
-    double volume() const { return length * width * height; }
+    virtual double volume() const { return length * width * height; }
+    void showVolume() const { std::cout << "Box usable volume is " << volume() << std::endl; }
 
     int compare(const Box& box) const
     {

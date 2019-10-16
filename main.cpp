@@ -6,6 +6,7 @@
 #include "Truckload.h"
 #include "Volume.h"
 #include "Carton.h"
+#include "ToughPack.h"
 
 long random(size_t count);
 using namespace std::rel_ops;
@@ -101,10 +102,23 @@ int main() {
     std::cout << "After prefix decrement: " << oneBox << std::endl;
     */
 
-    Carton carton1;
-    Carton carton2 {"Thin cardboard"};
-    Carton carton3 {4.0, 5.0, 6.0, "Plastic"};
-    Carton carton4 {2.0, "paper"};
+    Box *pBox = nullptr;
+    Carton carton {20.0, 30.0, 40.0, "Plastic"};
+
+    pBox = &carton;
+    std::cout << "The volume of the carton is " << pBox->volume() << std::endl;
+
+    ToughPack toughPack {20.0, 30.0, 40.0};
+    pBox = &toughPack;
+    std::cout << "The volume of the toughpack is " << pBox->volume() << std::endl;
+
+    std::vector<std::unique_ptr<Box>> polymorphicBoxes;
+    polymorphicBoxes.push_back(std::make_unique<Box>(20,30,40));
+    polymorphicBoxes.push_back(std::make_unique<ToughPack>(20,30,40));
+    polymorphicBoxes.push_back(std::make_unique<Carton>(20,30,40, "plastic"));
+
+    for (const auto& p : polymorphicBoxes)
+        p->showVolume();
 
     return 0;
 }

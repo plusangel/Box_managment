@@ -1,3 +1,6 @@
+## 0.0.17 - 16/10/2019
+Toughpack class added
+
 ## 0.0.16 - 01/10/2019
 Carton subclass added
 Box class modified
