@@ -1,3 +1,6 @@
+## 0.0.18 - 18/10/2019
+Box became abstract class
+
 ## 0.0.17 - 16/10/2019
 Toughpack class added
 

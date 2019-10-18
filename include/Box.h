@@ -36,7 +36,9 @@ public:
         //std::cout << "Box copy constructor" << std::endl;
     }
 
-    virtual double volume() const { return length * width * height; }
+    virtual ~Box() = default;
+
+    virtual double volume() const = 0;
     void showVolume() const { std::cout << "Box usable volume is " << volume() << std::endl; }
 
     int compare(const Box& box) const
@@ -51,15 +53,11 @@ public:
     bool operator==(const Box& aBox) const { return volume() == aBox.volume(); }
 
     Box& operator+=(const Box& aBox);
-    Box operator+(const Box& aBox) const;
 
     bool operator<(double value) const { return volume() < value; }
 
-    Box operator~() const { return Box {width, length, height};}
-
     Box& operator++();  // Overloaded prefix increment operator
     Box& operator--();
-    const Box operator++(int);  // Overloaded postfix increment operator
 
     double getLength() const { return length; }
 
@@ -105,13 +103,6 @@ inline Box& Box::operator--() // prefix
     return *this;
 }
 
-inline const Box Box::operator++(int) //postfix
-{
-    auto copy {*this};
-    ++(*this);
-    return copy;
-}
-
 inline Box& Box::operator+=(const Box &aBox)
 {
     length = std::max(length, aBox.length);
@@ -120,12 +111,6 @@ inline Box& Box::operator+=(const Box &aBox)
     return *this;
 }
 
-inline Box Box::operator+(const Box &aBox) const
-{
-    Box copy {*this};
-    copy += aBox;
-    return copy;
-}
 
 inline bool operator<(double value, const Box& aBox)
 { return value < aBox.volume(); }

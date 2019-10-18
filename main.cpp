@@ -11,17 +11,6 @@
 long random(size_t count);
 using namespace std::rel_ops;
 
-inline SharedBox randomBox()
-{
-    const size_t dimLimit {99};
-    return std::make_shared<Box>(random(dimLimit), random(dimLimit), random(dimLimit));
-}
-
-long random(const size_t count)
-{
-    return 1 + static_cast<unsigned>(std::rand()/(RAND_MAX / count + 1));
-}
-
 void show(const Box& box1, std::string_view relationship, const Box& box2)
 {
     std::cout << box1 << relationship << box2 << std::endl;
@@ -46,9 +35,9 @@ SharedBox findLargestBox(const Truckload& truckload)
 
 
 int main() {
-
-    std::srand(static_cast<unsigned>(std::time(nullptr)));
     /*
+    std::srand(static_cast<unsigned>(std::time(nullptr)));
+
     Truckload load1;
 
     const size_t boxCount {12};
@@ -113,7 +102,6 @@ int main() {
     std::cout << "The volume of the toughpack is " << pBox->volume() << std::endl;
 
     std::vector<std::unique_ptr<Box>> polymorphicBoxes;
-    polymorphicBoxes.push_back(std::make_unique<Box>(20,30,40));
     polymorphicBoxes.push_back(std::make_unique<ToughPack>(20,30,40));
     polymorphicBoxes.push_back(std::make_unique<Carton>(20,30,40, "plastic"));
 

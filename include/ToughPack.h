@@ -14,6 +14,8 @@ public:
     ToughPack(double lv, double wv, double hv) : Box {lv, wv, hv}
     { }
 
+    ~ToughPack() = default;
+
 protected:
     double volume() const override
     {
