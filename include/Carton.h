@@ -38,7 +38,7 @@ public:
     Carton() = default;
     ~Carton() = default;
 
-    double volume() const override { return 0.75 * length * width * height; }
+    double volume() const override { return 0.75 * volume(); }
 };
 
 #endif //TRUCKLOAD_CARTON_H

@@ -1,3 +1,6 @@
+## 0.0.20 - 31/10/2019
+Tests temporary fix
+
 ## 0.0.19 - 31/10/2019
 Exception class added and a little bit of housekeeping
 

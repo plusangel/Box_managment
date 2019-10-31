@@ -41,7 +41,8 @@ public:
 
     virtual ~Box() = default;
 
-    virtual double volume() const = 0;
+    virtual double volume() const { return (length*width*height); }
+
     void showVolume() const { std::cout << "Box usable volume is " << volume() << std::endl; }
 
     int compare(const Box& box) const
@@ -74,13 +75,15 @@ public:
                             << std::setw(2) << width  << ','
                             << std::setw(2) << height << ") ";
     }
+
+    Box operator+(const Box &aBox) const;
 };
 /*
 inline bool operator<(const Box& box1, const Box& box2)
 { return box1.volume() < box2.volume(); }
 */
 
-/*
+
 // standalone implementation
 inline Box Box::operator+(const Box &aBox) const
 {
@@ -88,7 +91,7 @@ inline Box Box::operator+(const Box &aBox) const
                 std::max(width, aBox.width),
                 height + aBox.height };
 }
- */
+
 
 inline Box& Box::operator++() // prefix
 {

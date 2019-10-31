@@ -19,7 +19,7 @@ public:
 protected:
     double volume() const override
     {
-        return 0.5 * length * width * height;
+        return 0.5 * volume();
     }
 };
 #endif //TRUCKLOAD_TOUGHPACK_H
