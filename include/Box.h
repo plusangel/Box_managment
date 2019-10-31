@@ -8,6 +8,7 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
+#include "Dimension_Error.h"
 
 class Box {
 protected:
@@ -18,6 +19,8 @@ protected:
 public:
     Box(double lv, double wv, double hv) : length {lv}, width {wv}, height {hv}
     {
+        if (lv <= 0.0 || wv <= 0.0 || hv <= 0.0)
+            throw  dimension_error{ std::min({lv, wv, hv}) };
         //std::cout << "Box(double, double, double) called.\n";
     }
 

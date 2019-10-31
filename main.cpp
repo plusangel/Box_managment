@@ -7,6 +7,7 @@
 #include "Volume.h"
 #include "Carton.h"
 #include "ToughPack.h"
+#include "Dimension_Error.h"
 
 long random(size_t count);
 using namespace std::rel_ops;
@@ -91,22 +92,33 @@ int main() {
     std::cout << "After prefix decrement: " << oneBox << std::endl;
     */
 
-    Box *pBox = nullptr;
-    Carton carton {20.0, 30.0, 40.0, "Plastic"};
+    try
+    {
+        Box *pBox = nullptr;
+        Carton carton{20.0, 30.0, 40.0, "Plastic"};
 
-    pBox = &carton;
-    std::cout << "The volume of the carton is " << pBox->volume() << std::endl;
+        pBox = &carton;
+        std::cout << "The volume of the carton is " << pBox->volume() << std::endl;
 
-    ToughPack toughPack {20.0, 30.0, 40.0};
-    pBox = &toughPack;
-    std::cout << "The volume of the toughpack is " << pBox->volume() << std::endl;
+        ToughPack toughPack{20.0, 30.0, 0.0};
+        pBox = &toughPack;
+        std::cout << "The volume of the toughpack is " << pBox->volume() << std::endl;
 
-    std::vector<std::unique_ptr<Box>> polymorphicBoxes;
-    polymorphicBoxes.push_back(std::make_unique<ToughPack>(20,30,40));
-    polymorphicBoxes.push_back(std::make_unique<Carton>(20,30,40, "plastic"));
+        std::vector<std::unique_ptr<Box>> polymorphicBoxes;
+        polymorphicBoxes.push_back(std::make_unique<ToughPack>(20, 30, 40));
+        polymorphicBoxes.push_back(std::make_unique<Carton>(20, 30, 40, "plastic"));
 
-    for (const auto& p : polymorphicBoxes)
-        p->showVolume();
+        for (const auto &p : polymorphicBoxes)
+            p->showVolume();
+    }
+    catch (const dimension_error& ex)
+    {
+        std::cout << "Exception caught in main(): " << ex.what() << std::endl;
+    }
+    catch (const std::exception& ex)
+    {
+        std::cout << "Exception caught in main(): " << ex.what() << std::endl;
+    }
 
     return 0;
 }

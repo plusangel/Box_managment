@@ -1,3 +1,6 @@
+## 0.0.19 - 31/10/2019
+Exception class added and a little bit of housekeeping
+
 ## 0.0.18 - 18/10/2019
 Box became abstract class
 
