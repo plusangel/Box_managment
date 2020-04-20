@@ -1,3 +1,6 @@
+## 0.0.21 - 20/04/2020
+Throw exception when subscript operator is out of range
+
 ## 0.0.20 - 31/10/2019
 Tests temporary fix
 
