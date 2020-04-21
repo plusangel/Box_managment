@@ -16,11 +16,43 @@ inline SharedBox randomBox() {
                                random(dimLimit));
 }
 
-TEST_CASE("out of range subscript operator") {
-  const size_t nBoxes{6};
-  Truckload load1;
-  for (size_t i{}; i < nBoxes; ++i)
-    load1.addBox(randomBox());
+TEST_CASE("truckload tests") {
 
-  REQUIRE_THROWS_AS(load1[6], std::out_of_range);
+  SECTION("out of range subscript operator") {
+    const size_t nBoxes{6};
+    Truckload load1;
+    for (size_t i{}; i < nBoxes; ++i)
+      load1.addBox(randomBox());
+
+    REQUIRE_THROWS_AS(load1[6], std::out_of_range);
+  }
+
+  SECTION("Test copy constructor") {
+    const size_t nBoxes{6};
+    Truckload load1;
+    for (size_t i{}; i < nBoxes; ++i)
+      load1.addBox(randomBox());
+
+    Truckload load2{load1};
+    bool flag{true};
+    for (size_t i{}; i < nBoxes; ++i) {
+      if (load1[i] != load2[i]) {
+        flag = false;
+        break;
+      }
+    }
+    REQUIRE(flag);
+  }
+
+  SECTION("Test move constructor") {
+    const size_t nBoxes{6};
+    Truckload load1;
+    for (size_t i{}; i < nBoxes; ++i)
+      load1.addBox(randomBox());
+
+    Truckload load2{std::move(load1)};
+
+    REQUIRE(load2.count() == nBoxes);
+    REQUIRE(load1.count() == 0);
+  }
 }

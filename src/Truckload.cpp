@@ -11,9 +11,17 @@ Truckload::Truckload(const std::vector<SharedBox> &boxes) {
 }
 
 Truckload::Truckload(const Truckload &src) {
+  std::cout << "Copy constructor invoked" << std::endl;
   for (Package *a_package{src.pHead}; a_package; a_package = a_package->pNext) {
     addBox(a_package->pBox);
   }
+}
+
+Truckload::Truckload(Truckload &&moved) noexcept
+    : pHead{moved.pHead}, pTail{moved.pTail} {
+  std::cout << "Move constructor invoked" << std::endl;
+  moved.pHead = nullptr;
+  moved.pTail = nullptr;
 }
 
 SharedBox Truckload::Iterator::getFirstBox() {
@@ -69,4 +77,13 @@ SharedBox &Truckload::operator[](size_t index) {
       return package->pBox;
   }
   throw std::out_of_range{"Index too large " + std::to_string(index)};
+}
+
+size_t Truckload::count() const {
+  size_t count{};
+  if (pHead == nullptr)
+    return 0;
+  for (Package *package{pHead}; package; package = package->pNext)
+    count++;
+  return count;
 }

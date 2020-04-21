@@ -1,3 +1,6 @@
+## 0.0.22 - 21/04/2020
+Move constructor added to truckload container class
+
 ## 0.0.21 - 20/04/2020
 Throw exception when subscript operator is out of range
 
